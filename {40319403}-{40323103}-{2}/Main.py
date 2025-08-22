@@ -10,6 +10,7 @@ RoadMap:
 """
 
 import random
+
 rand = random.SystemRandom()
 
 '''
@@ -61,3 +62,21 @@ def single_test(n, a):
 
     return False
 '''
+
+
+def miller_rabin(n, k=40):
+    # Handling numbers lower than 4.
+    if n < 2:
+        return False
+    if n == 2 or n == 3:
+        return True
+    if n % 2 == 0:
+        return False
+
+    # Applying the test 'k' times(usually 40).
+    for i in range(k):
+        a = rand.randrange(2, n - 1)
+        if not single_test(n, a):
+            return False
+
+    return True
