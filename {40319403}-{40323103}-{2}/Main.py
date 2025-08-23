@@ -80,3 +80,18 @@ def miller_rabin(n, k=40):
             return False
 
     return True
+
+
+def gen_prime(bits):
+    while True:
+        # Generating a random number.
+        a = random.getrandbits(bits)
+
+        # Making sure 'a' has its highest bit set to 1.
+        a |= (1 << bits - 1)
+
+        # Making the least significant bit 1.
+        # Ensures our number is odd.
+        a |= 1
+        if miller_rabin(a):
+            return a
