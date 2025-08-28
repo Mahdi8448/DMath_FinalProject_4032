@@ -95,3 +95,20 @@ def gen_prime(bits):
         a |= 1
         if miller_rabin(a):
             return a
+
+'''
+------------------------ STEP TWO --------------------------
+--------------- CALCULATING EULER FUNCTION -----------------
+'''
+
+
+# Calculate n (used for the public and private keys)
+def calc_n(self, p, q):
+    return p * q
+
+
+# Calculating phi_n(n)
+# Number of "numbers" that are coprime with n.
+def calc_phi_n(self, p, q):
+    return (p - 1) * (q - 1)
+
