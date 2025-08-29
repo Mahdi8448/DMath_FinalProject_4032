@@ -141,3 +141,47 @@ def find_e(self, phi_n):
     while self.gcd(e, phi_n) != 1:
         e += 2
     return e
+
+'''
+------------------------ STEP FOUR --------------------------
+-------------------- CREATING PRIVET KEY ---------------------
+'''
+
+# Extended Euclidean Algorithm
+def extended_Euclid_gcd(self, a, b):
+    # Initializing the variables
+    old_r, r = a, b
+    old_s, s = 1, 0
+    old_t, t = 0, 1
+    # Loop until remainder becomes zero
+    while r != 0:
+        quotient = old_r // r
+            # Update remainders
+        old_r, r = r, old_r - quotient * r
+
+        # Update s coefficients
+        old_s, s = s, old_s - quotient * s
+        # Update t coefficients
+        old_t, t = t, old_t - quotient * t
+
+    # Final result will be: gcd = old_r, coefficients = old_s, old_t
+    return old_r, old_s, old_t
+
+''' 
+--------- Algorithm with use of recursion ---------
+def extended_Euclid_gcd(a, b):
+    if a == 0:
+        return b, 0, 1
+    gcd, x1, y1 = extended_Euclid_gcd(b % a, a)
+    t = t1 - (b // a) * t1
+    s = s1
+    return gcd, t, s
+'''
+
+def modinv(self, a, m):
+    # Calculating the modular inverse of a mod m.
+    # This finds 's' such that (a * s) % m = 1.
+    g, s, t = self.extended_Euclid_gcd(a, m)
+    if g != 1:
+        raise Exception('modular inverse does not exist')
+    return s % m
