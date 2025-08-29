@@ -96,6 +96,7 @@ def gen_prime(bits):
         if miller_rabin(a):
             return a
 
+
 '''
 ------------------------ STEP TWO --------------------------
 --------------- CALCULATING EULER FUNCTION -----------------
@@ -112,3 +113,31 @@ def calc_n(self, p, q):
 def calc_phi_n(self, p, q):
     return (p - 1) * (q - 1)
 
+
+'''
+------------------------ STEP THREE --------------------------
+-------------------- CREATING PUBLIC KEY ---------------------
+'''
+
+
+# A helper function to calculate gcd.
+def gcd(self, a, b):
+    while b:
+        temp = a
+        a = b
+        b = temp % b
+    return a
+
+
+# We call public exponent in RSA encryption 'e'.
+# 'e' must satisfy two conditions: (1 < e < phi_n) & (being coprime with phi_n).
+# The number 65537 is a common choice for 'e'. More details in PDF.
+def find_e(self, phi_n):
+    e = 65537
+    if self.gcd(e, phi_n) == 1:
+        return e
+
+    # Making sure e is coprime with phi_n.
+    while self.gcd(e, phi_n) != 1:
+        e += 2
+    return e
