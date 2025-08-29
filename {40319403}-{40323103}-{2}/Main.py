@@ -185,3 +185,29 @@ def modinv(self, a, m):
     if g != 1:
         raise Exception('modular inverse does not exist')
     return s % m
+
+'''
+------------------------ STEP FIVE --------------------------
+----------------- ENCRYPTION & DECRYPTION -------------------
+'''
+
+def encrypt(self, plaintext: str):
+    # Using UTF-8 character encoding standard.
+    msg_int = int.from_bytes(plaintext.encode('utf-8'), 'big')
+    cipher_int = pow(msg_int, self.e, self.n)
+    return cipher_int
+
+def decrypt(self, ciphertext: int):
+    msg_int = pow(ciphertext, self.d, self.n)
+    length = (msg_int.bit_length() + 7) // 8
+    return msg_int.to_bytes(length, 'big').decode('utf-8')
+
+# I couldn't use UTF-8 strings in Attack class as 'n' is too short
+# So, our tests in Attack class uses these two functions
+def encrypt_number(self, number: int):
+    if number >= self.n:
+        raise ValueError("Number too large for this RSA modulus!")
+    return pow(number, self.e, self.n)
+
+def decrypt_number(self, ciphertext: int):
+    return pow(ciphertext, self.d, self.n)
